@@ -1,0 +1,68 @@
+[
+  {
+    "turno": 1,
+    "tipo_prueba": "Razonamiento multi-paso (>= 2 herramientas)",
+    "mensajes": [
+      {
+        "rol": "human",
+        "contenido": "Consultame los datos del cliente con email ana.gomez@hotmail.com y decime cuantos pedidos tiene y el monto de su ultimo pedido."
+      },
+      {
+        "rol": "ai",
+        "contenido": "",
+        "llamadas_herramientas": [
+          {
+            "name": "buscar_cliente",
+            "args": {
+              "identificador": "ana.gomez@hotmail.com"
+            },
+            "id": "call_278054",
+            "type": "tool_call"
+          }
+        ]
+      },
+      {
+        "rol": "tool",
+        "contenido": "{\"id_cliente\": 102, \"nombre\": \"Ana Gomez\", \"email\": \"ana.gomez@hotmail.com\", \"estado\": \"activo\"}",
+        "nombre_herramienta": "buscar_cliente"
+      },
+      {
+        "rol": "ai",
+        "contenido": "",
+        "llamadas_herramientas": [
+          {
+            "name": "buscar_pedidos_cliente",
+            "args": {
+              "id_cliente": 102
+            },
+            "id": "call_216075",
+            "type": "tool_call"
+          }
+        ]
+      },
+      {
+        "rol": "tool",
+        "contenido": "{\"id_cliente\": 102, \"cantidad_pedidos\": 3, \"total_acumulado\": 14500, \"pedidos\": [{\"id_pedido\": 501, \"fecha\": \"2026-08-15\", \"monto\": 3000, \"producto\": \"Licencia software basic\"}, {\"id_pedido\": 502, \"fecha\": \"2026-09-02\", \"monto\": 4500, \"producto\": \"Servidor cloud adicional\"}, {\"id_pedido\": 503, \"fecha\": \"2026-10-01\", \"monto\": 7000, \"producto\": \"Plan de soporte premium\"}]}",
+        "nombre_herramienta": "buscar_pedidos_cliente"
+      },
+      {
+        "rol": "ai",
+        "contenido": "Ana Gomez se encuentra registrada con el estado activo. Tiene un total de 3 pedidos realizados, y el monto de su ultimo pedido es de 7000."
+      }
+    ]
+  },
+  {
+    "turno": 2,
+    "tipo_prueba": "Memoria persistente (contexto recordado sin reiniciar)",
+    "mensajes": [
+      {
+        "rol": "human",
+        "contenido": "¿Y que producto o servicio especifico adquirio en ese ultimo pedido?"
+      },
+      {
+        "rol": "ai",
+        "contenido": "En su ultimo pedido, Ana Gomez adquirio el Plan de soporte premium."
+      }
+    ]
+  }
+]
